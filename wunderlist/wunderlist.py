@@ -90,10 +90,14 @@ class Wunderlist:
         # this request
         return response
 
-    def GetFolders(self):
+    def GetFolders(self, folder_id=None):
         """Gets list of all Folders"""
         _url = "folders"
-        response = self._get(_url, auth=True)
+        data = {}
+        if folder_id:
+            # TODO: Error checking for folder_id param?
+            data['id'] = folder_id
+        response = self._get(_url, data=data, auth=True)
         return response.json()
 
     def GetUser(self):
