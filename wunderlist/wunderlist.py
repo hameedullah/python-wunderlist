@@ -48,9 +48,10 @@ class Wunderlist:
             headers['X-Access-Token'] = self._access_token
         else:
             headers = {}
-        print("Getting... %s" % (url,))
-        print("Headers... %s" % (headers,))
-        response = requests.get(url, headers=headers)
+
+        _api_url = "%s/%s" % (self._api,url)
+
+        response = requests.get(_api_url, headers=headers)
         return response
 
     def setAccessToken(self, access_token):
@@ -77,19 +78,23 @@ class Wunderlist:
         Returns:
             Avatar Image
         """
-        _avatar_url = "%s/avatar" % (self._api,)
+        _url = "/avatar"
         data = {}
         data['user_id'] = user_id
         if size: data['size'] = size
         if type(fallback) != type(None): data['fallback'] = fallback
-        response = self._get(_avatar_url, auth=False)
+        response = self._get(_url, auth=False)
         # TODO: Add more options to manipulate the binary data returned for
         # this request
         return response
 
+    def GetFolders(self):
+        """Gets list of all Folders"""
+        pass
+
     def GetUser(self):
-        _avatar_url = "%s/user" % (self._api,)
-        response = self._get(_avatar_url, auth=True)
+        _url = "/user"
+        response = self._get(_url, auth=True)
         return response.json()
 
 if __name__ == "__main__":
