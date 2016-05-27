@@ -51,7 +51,10 @@ class Wunderlist:
 
         _api_url = "%s/%s" % (self._api,url)
 
+        print("API URL: %s" % (_api_url,))
+
         response = requests.get(_api_url, headers=headers)
+        print (response.content)
         return response
 
     def setAccessToken(self, access_token):
@@ -78,7 +81,7 @@ class Wunderlist:
         Returns:
             Avatar Image
         """
-        _url = "/avatar"
+        _url = "avatar"
         data = {}
         data['user_id'] = user_id
         if size: data['size'] = size
@@ -90,10 +93,12 @@ class Wunderlist:
 
     def GetFolders(self):
         """Gets list of all Folders"""
-        pass
+        _url = "folders"
+        response = self._get(_url, auth=True)
+        return response.json()
 
     def GetUser(self):
-        _url = "/user"
+        _url = "user"
         response = self._get(_url, auth=True)
         return response.json()
 
