@@ -41,7 +41,7 @@ class Wunderlist:
 
         self._api = "http://%s/%s" % (self._api_url, self.api_version)
 
-    def _get(self, url, auth=False):
+    def _get(self, url, data={}, auth=False):
         if auth:
             headers = {}
             headers['X-Client-ID'] = self._client_id
@@ -53,7 +53,7 @@ class Wunderlist:
 
         print("API URL: %s" % (_api_url,))
 
-        response = requests.get(_api_url, headers=headers)
+        response = requests.get(_api_url, params=data, headers=headers)
         return response
 
     def setAccessToken(self, access_token):
@@ -85,7 +85,7 @@ class Wunderlist:
         data['user_id'] = user_id
         if size: data['size'] = size
         if type(fallback) != type(None): data['fallback'] = fallback
-        response = self._get(_url, auth=False)
+        response = self._get(_url, data=data, auth=False)
         # TODO: Add more options to manipulate the binary data returned for
         # this request
         return response
