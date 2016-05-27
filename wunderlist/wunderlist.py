@@ -54,7 +54,6 @@ class Wunderlist:
         print("API URL: %s" % (_api_url,))
 
         response = requests.get(_api_url, headers=headers)
-        print (response.content)
         return response
 
     def setAccessToken(self, access_token):
