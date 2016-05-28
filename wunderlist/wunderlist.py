@@ -102,12 +102,12 @@ class Wunderlist:
 
     def GetLists(self, list_id=None):
         """Get List(s) from Wunderlist"""
-        _url = "lists"
-        data = {}
         if list_id:
             # TODO: Add data validation on all params
-            data['id'] = list_id
-        response = self._get(_url, data=data, auth=True)
+            _url = "lists/%s" % list_id
+        else:
+            _url = "lists"
+        response = self._get(_url, auth=True)
         return response.json()
 
     def GetUser(self):
