@@ -214,6 +214,25 @@ class Wunderlist:
         response = self._get(_url, data=data, auth=True)
         return response.json()
 
+    def GetTaskComments(self, task_comment_id=None, task_id=None, list_id=None):
+        """Get Task Comments(s) from Wunderlist"""
+        if not task_comment_id or not task_id or not list_id:
+            # TODO: raise an exception if both params not specified
+            return None
+        data = {}
+        _url = "task_comments"
+
+        if list_id:
+            # TODO: Add data validation on all params
+            data['list_id'] = list_id
+        elif task_id:
+            data['task_id'] = task_id
+        else:
+            _url = "task_comments/%s" % task_comment_id
+            data = {}
+        response = self._get(_url, data=data, auth=True)
+        return response.json()
+
     def GetUser(self):
         _url = "user"
         response = self._get(_url, auth=True)
