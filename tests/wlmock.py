@@ -11,6 +11,8 @@ JSON_FIXTURES = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtu
 def api_endpoint(url, request):
     # TODO: Debug why os.path.join not working here
     json_path = JSON_FIXTURES + url.path
+    if os.path.isdir(json_path):
+        json_path = os.path.join(json_path, "index")
     try:
         with open(json_path, 'r') as j:
             content = j.read()
