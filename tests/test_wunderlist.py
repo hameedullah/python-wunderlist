@@ -73,5 +73,46 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('id' in results)
         self.assertTrue('title' in results)
 
+    def test_get_notes_no_param(self):
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetNotes()
+
+        self.assertEqual(results, None)
+
+    def test_get_notes_task_id(self):
+        task_id = "1234567890"
+
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetNotes(task_id=task_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue(len(results), 1)
+        self.assertTrue('content' in results[0])
+        self.assertEqual(results[0]['type'], 'note')
+
+    def test_get_notes_list_id(self):
+        list_id = "12345678"
+
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetNotes(list_id=list_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue(len(results), 1)
+        self.assertTrue('content' in results[0])
+        self.assertEqual(results[0]['type'], 'note')
+
+    def test_get_notes_note_id(self):
+        note_id = "123456789"
+
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetNotes(note_id=note_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, dict)
+        self.assertTrue('content' in results)
+        self.assertEqual(results['type'], 'note')
+
 if __name__ == '__main__':
     unittest.main()
