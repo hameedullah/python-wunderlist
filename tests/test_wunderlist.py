@@ -33,7 +33,6 @@ class TestWunderlist(unittest.TestCase):
         self.assertEqual(results['email'], email)
 
     def test_get_folders(self):
-
         with HTTMock(wlmock.api_endpoint):
             results = self.wunderlist.GetFolders()
 
@@ -42,6 +41,17 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue(len(results), 2)
         self.assertTrue('title' in results[0])
 
+    def test_get_folder(self):
+        folder_id = "7654321"
+
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetFolders(folder_id=folder_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, dict)
+        self.assertTrue('id' in results)
+        self.assertTrue('title' in results)
+        self.assertTrue('list_ids' in results)
 
 if __name__ == '__main__':
     unittest.main()
