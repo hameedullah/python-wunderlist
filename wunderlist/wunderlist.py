@@ -110,6 +110,110 @@ class Wunderlist:
         response = self._get(_url, auth=True)
         return response.json()
 
+    def GetNotes(self, note_id=None, task_id=None, list_id=None):
+        """Get Note(s) from Wunderlist"""
+        if not note_id or not list_id or not task_id:
+            # TODO: raise an exception if both params not specified
+            return None
+        data = {}
+        _url = "notes"
+        if list_id:
+            # TODO: Add data validation on all params
+            data['list_id'] = list_id
+        elif task_id:
+            data['task_id'] = task_id
+        else:
+            _url = "notes/%s" % note_id
+        response = self._get(_url, data=data, auth=True)
+        return response.json()
+
+    def GetListPositions(self, list_id=None):
+        """Get List(s) positions from Wunderlist"""
+        if list_id:
+            # TODO: Add data validation on all params
+            _url = "list_positions/%s" % list_id
+        else:
+            _url = "list_positions"
+        response = self._get(_url, auth=True)
+        return response.json()
+
+    def GetTaskPositions(self, task_id=None):
+        """Get Task(s) positions from Wunderlist"""
+        if task_id:
+            # TODO: Add data validation on all params
+            _url = "task_positions/%s" % task_id
+        else:
+            _url = "task_positions"
+        response = self._get(_url, auth=True)
+        return response.json()
+
+    def GetSubTaskPositions(self, subtask_id=None):
+        """Get Sub Task(s) positions from Wunderlist"""
+        if subtask_id:
+            # TODO: Add data validation on all params
+            _url = "subtask_positions/%s" % subtask_id
+        else:
+            _url = "subtask_positions"
+        response = self._get(_url, auth=True)
+        return response.json()
+
+    def GetReminders(self, task_id=None, list_id=None):
+        """Get Reminder(s) from Wunderlist"""
+        if not list_id or not task_id:
+            # TODO: raise an exception if both params not specified
+            return None
+        data = {}
+        _url = "reminders"
+        if list_id:
+            # TODO: Add data validation on all params
+            data['list_id'] = list_id
+        else:
+            data['task_id'] = task_id
+        response = self._get(_url, data=data, auth=True)
+        return response.json()
+
+    def GetSubTasks(self, subtask_id=None, task_id=None, list_id=None, completed=None):
+        """Get Sub Task(s) from Wunderlist"""
+        if not subtask_id or not list_id or not task_id:
+            # TODO: raise an exception if both params not specified
+            return None
+        data = {}
+        _url = "subtasks"
+
+        if type(completed) == bool:
+            data['completed'] = completed
+
+        if list_id:
+            # TODO: Add data validation on all params
+            data['list_id'] = list_id
+        elif task_id:
+            data['task_id'] = task_id
+        else:
+            _url = "subtasks/%s" % subtask_id
+            data = {}
+        response = self._get(_url, data=data, auth=True)
+        return response.json()
+
+    def GetTasks(self, task_id=None, list_id=None, completed=None):
+        """Get Task(s) from Wunderlist"""
+        if not task_id or not list_id:
+            # TODO: raise an exception if both params not specified
+            return None
+        data = {}
+        _url = "tasks"
+
+        if type(completed) == bool:
+            data['completed'] = completed
+
+        if list_id:
+            # TODO: Add data validation on all params
+            data['list_id'] = list_id
+        else:
+            _url = "tasks/%s" % task_id
+            data = {}
+        response = self._get(_url, data=data, auth=True)
+        return response.json()
+
     def GetUser(self):
         _url = "user"
         response = self._get(_url, auth=True)
