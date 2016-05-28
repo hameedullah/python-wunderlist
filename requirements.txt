@@ -4,7 +4,6 @@ httmock==1.2.5
 nose==1.3.7
 pbr==1.10.0
 pip-tools==1.6.5
-https://github.com/hameedullah/python-wunderlist.git@673ac5d797679bd146a745ab00812769df424da7#egg=python_wunderlist
 requests==2.10.0
 six==1.10.0
 todoist-python==0.2.26
