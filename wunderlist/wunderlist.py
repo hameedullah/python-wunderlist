@@ -112,7 +112,7 @@ class Wunderlist:
 
     def GetNotes(self, note_id=None, task_id=None, list_id=None):
         """Get Note(s) from Wunderlist"""
-        if not note_id or not list_id or not task_id:
+        if not note_id and not list_id and not task_id:
             # TODO: raise an exception if both params not specified
             return None
         data = {}
@@ -159,7 +159,7 @@ class Wunderlist:
 
     def GetReminders(self, task_id=None, list_id=None):
         """Get Reminder(s) from Wunderlist"""
-        if not list_id or not task_id:
+        if not list_id and not task_id:
             # TODO: raise an exception if both params not specified
             return None
         data = {}
@@ -174,7 +174,7 @@ class Wunderlist:
 
     def GetSubTasks(self, subtask_id=None, task_id=None, list_id=None, completed=None):
         """Get Sub Task(s) from Wunderlist"""
-        if not subtask_id or not list_id or not task_id:
+        if not subtask_id and not list_id and not task_id:
             # TODO: raise an exception if both params not specified
             return None
         data = {}
@@ -196,7 +196,7 @@ class Wunderlist:
 
     def GetTasks(self, task_id=None, list_id=None, completed=None):
         """Get Task(s) from Wunderlist"""
-        if not task_id or not list_id:
+        if not task_id and not list_id:
             # TODO: raise an exception if both params not specified
             return None
         data = {}
@@ -216,7 +216,7 @@ class Wunderlist:
 
     def GetTaskComments(self, task_comment_id=None, task_id=None, list_id=None):
         """Get Task Comments(s) from Wunderlist"""
-        if not task_comment_id or not task_id or not list_id:
+        if not task_comment_id and not task_id and not list_id:
             # TODO: raise an exception if both params not specified
             return None
         data = {}
