@@ -92,11 +92,21 @@ class Wunderlist:
 
     def GetFolders(self, folder_id=None):
         """Gets list of all Folders"""
-        _url = "folders"
-        data = {}
         if folder_id:
             # TODO: Error checking for folder_id param?
-            data['id'] = folder_id
+            _url = "folders/%s" % folder_id
+        else:
+            _url = "folders"
+        response = self._get(_url, auth=True)
+        return response.json()
+
+    def GetLists(self, list_id=None):
+        """Get List(s) from Wunderlist"""
+        _url = "lists"
+        data = {}
+        if list_id:
+            # TODO: Add data validation on all params
+            data['id'] = list_id
         response = self._get(_url, data=data, auth=True)
         return response.json()
 
