@@ -41,7 +41,7 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue(len(results), 2)
         self.assertTrue('title' in results[0])
 
-    def test_get_folder(self):
+    def test_get_folders_folder_id(self):
         folder_id = "7654321"
 
         with HTTMock(wlmock.api_endpoint):
