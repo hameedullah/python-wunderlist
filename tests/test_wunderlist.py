@@ -161,6 +161,44 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('type' in results[0])
         self.assertEqual(results[0]['type'], 'task_position')
 
+    def test_get_subtask_positions_list_id(self):
+        list_id = "12345678"
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetSubTaskPositions(list_id=list_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('values' in results[0])
+        self.assertTrue('task_id' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'subtask_position')
+
+    def test_get_subtask_positions_task_id(self):
+        task_id = "1795987716"
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetSubTaskPositions(task_id=task_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('values' in results[0])
+        self.assertTrue('task_id' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'subtask_position')
+
+    def test_get_subtask_positions_id(self):
+        pos_id = "1795987716"
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetSubTaskPositions(pos_id=pos_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, dict)
+        self.assertTrue('id' in results)
+        self.assertTrue('values' in results)
+        self.assertTrue('task_id' in results)
+        self.assertTrue('type' in results)
+        self.assertEqual(results['type'], 'subtask_position')
 
 if __name__ == '__main__':
     unittest.main()
