@@ -114,5 +114,29 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('content' in results)
         self.assertEqual(results['type'], 'note')
 
+    def test_get_list_positions(self):
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetListPositions()
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('values' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'list_position')
+
+    def test_get_list_positions_list_id(self):
+        list_id = ""
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetListPositions(list_id=list_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('values' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'list_position')
+
+
 if __name__ == '__main__':
     unittest.main()
