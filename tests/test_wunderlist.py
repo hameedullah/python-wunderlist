@@ -63,7 +63,7 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('title' in results[0])
         self.assertTrue('title' in results[1])
 
-    def test_get_lists(self):
+    def test_get_lists_list_id(self):
         list_id = "12345678"
         with HTTMock(wlmock.api_endpoint):
             results = self.wunderlist.GetLists(list_id=list_id)
