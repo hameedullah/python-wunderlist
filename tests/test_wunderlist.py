@@ -201,5 +201,31 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('type' in results)
         self.assertEqual(results['type'], 'subtask_position')
 
+    def test_get_reminders_list_id(self):
+        list_id = "12345678"
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetReminders(list_id=list_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('date' in results[0])
+        self.assertTrue('task_id' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'reminder')
+
+    def test_get_reminders_task_id(self):
+        task_id = "1795987716"
+        with HTTMock(wlmock.api_endpoint):
+            results = self.wunderlist.GetReminders(task_id=task_id)
+
+        self.assertNotEqual(results, None)
+        self.assertIsInstance(results, list)
+        self.assertTrue('id' in results[0])
+        self.assertTrue('date' in results[0])
+        self.assertTrue('task_id' in results[0])
+        self.assertTrue('type' in results[0])
+        self.assertEqual(results[0]['type'], 'reminder')
+
 if __name__ == '__main__':
     unittest.main()
