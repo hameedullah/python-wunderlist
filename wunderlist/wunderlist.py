@@ -127,24 +127,28 @@ class Wunderlist:
         response = self._get(_url, data=data, auth=True)
         return response.json()
 
-    def GetListPositions(self, list_id=None):
+    def GetListPositions(self, pos_id=None):
         """Get List(s) positions from Wunderlist"""
-        if list_id:
+        if pos_id:
             # TODO: Add data validation on all params
-            _url = "list_positions/%s" % list_id
+            _url = "list_positions/%s" % pos_id
         else:
             _url = "list_positions"
         response = self._get(_url, auth=True)
         return response.json()
 
-    def GetTaskPositions(self, task_id=None):
+    def GetTaskPositions(self, pos_id=None, list_id=None):
         """Get Task(s) positions from Wunderlist"""
-        if task_id:
+        data = {}
+        if not pos_id and not list_id:
+            return None
+        if pos_id:
             # TODO: Add data validation on all params
-            _url = "task_positions/%s" % task_id
+            _url = "task_positions/%s" % pos_id
         else:
             _url = "task_positions"
-        response = self._get(_url, auth=True)
+            data['list_id'] = list_id
+        response = self._get(_url, data=data, auth=True)
         return response.json()
 
     def GetSubTaskPositions(self, subtask_id=None):
