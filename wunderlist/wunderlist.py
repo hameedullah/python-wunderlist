@@ -151,14 +151,20 @@ class Wunderlist:
         response = self._get(_url, data=data, auth=True)
         return response.json()
 
-    def GetSubTaskPositions(self, subtask_id=None):
+    def GetSubTaskPositions(self, pos_id=None, task_id=None, list_id=None):
         """Get Sub Task(s) positions from Wunderlist"""
-        if subtask_id:
+        if not pos_id and not list_id and not task_id:
+            return None
+        data = {}
+        _url = "subtask_positions"
+        if list_id:
             # TODO: Add data validation on all params
-            _url = "subtask_positions/%s" % subtask_id
+            data['list_id'] = list_id
+        elif task_id:
+            data['task_id'] = task_id
         else:
-            _url = "subtask_positions"
-        response = self._get(_url, auth=True)
+            _url = "subtask_positions/%s" % pos_id
+        response = self._get(_url, data=data, auth=True)
         return response.json()
 
     def GetReminders(self, task_id=None, list_id=None):
