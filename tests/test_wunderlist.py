@@ -240,7 +240,7 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('type' in results[0])
         self.assertEqual(results[0]['type'], 'subtask')
 
-    def test_get_reminders_task_id(self):
+    def test_get_subtasks_task_id(self):
         task_id = "1795987716"
         with HTTMock(wlmock.api_endpoint):
             results = self.wunderlist.GetSubTasks(task_id=task_id)
@@ -253,7 +253,7 @@ class TestWunderlist(unittest.TestCase):
         self.assertTrue('type' in results[0])
         self.assertEqual(results[0]['type'], 'subtask')
 
-    def test_get_reminders_task_id(self):
+    def test_get_subtasks_subtask_id(self):
         subtask_id = "1254964618"
         with HTTMock(wlmock.api_endpoint):
             results = self.wunderlist.GetSubTasks(subtask_id=subtask_id)
