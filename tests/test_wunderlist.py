@@ -8,6 +8,7 @@ from httmock import HTTMock
 import wunderlist
 import wlmock
 
+# TODO: Organize End points tests into their own classes
 
 class TestWunderlist(unittest.TestCase):
     """Basic Unit Test Class for Wunderlist Class"""
